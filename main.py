@@ -35,6 +35,6 @@ for folder in os.listdir(path):
 
 df = pd.DataFrame(data, columns=['Country','Flag','Path','Folder','WebPath'])
 
-df.to_csv("assets/flags_new/country_flags_dataset.csv")
+df.to_csv("datasets/country_flags_dataset.csv")
 
 print(df)
