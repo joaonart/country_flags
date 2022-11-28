@@ -31,7 +31,7 @@ for folder in os.listdir(path):
             original = f"{path}/{folder}/{item}"
             target = f"assets/flags_new/{folder}/{new_item}.png"
             shutil.copyfile(original, target)
-            data.append([new_item,f"{new_item}.png",target,folder,f"https://github.com/joaonart/country_flags/raw/master/assets/flags_new/{folder}/{new_item}.png"])
+            data.append([new_item,f"{new_item}.png",target,folder,f"https://raw.githubusercontent.com/joaonart/country_flags/master/assets/flags_new/{folder}/{new_item}.png"])
 
 df = pd.DataFrame(data, columns=['Country','Flag','Path','Folder','WebPath'])
 
