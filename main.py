@@ -4,21 +4,25 @@ import shutil
 import pandas as pd
 from os.path import exists
 
+
 def adjust_name(name):
-    name = name.replace('austallia','australia')
+    name = name.replace('austallia', 'australia')
     return name.capitalize()
+
 
 def mkdirs(directory, mode=0o777):
     try:
         os.makedirs(directory, mode)
     except OSError as err:
         return err
+
+
 def file_exists(file_path, file_name):
     if exists(file_path):
         file_name_new = f"{file_name}-{str(uuid.uuid4().fields[-1])[:5]}"
-        file_path = file_path.replace(file_name,file_name_new)
-        return file_path,file_name_new
-    return file_path,file_name
+        file_path = file_path.replace(file_name, file_name_new)
+        return file_path, file_name_new
+    return file_path, file_name
 
 
 data = []
@@ -37,11 +41,12 @@ try:
                 mkdirs(f"assets/flags_new/{folder}")
                 original = f"{path}/{folder}/{item}"
                 target = f"assets/flags_new/{folder}/{new_item}.png"
-                target,new_item = file_exists(target,new_item)
+                target, new_item = file_exists(target, new_item)
                 shutil.copyfile(original, target)
-                data.append([new_item,f"{new_item}.png",target,folder,f"{remote_path_base}/{folder}/{new_item}.png"])
+                data.append([new_item, f"{new_item}.png", target, folder,
+                             f"{remote_path_base}/{folder}/{new_item}.png"])
 
-    df = pd.DataFrame(data, columns=['Country','Flag','Path','Folder','WebPath'])
+    df = pd.DataFrame(data, columns=['Country', 'Flag', 'Path', 'Folder', 'WebPath'])
 
     df.to_csv("datasets/country_flags_dataset.csv")
 
